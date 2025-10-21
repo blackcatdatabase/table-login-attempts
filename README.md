@@ -2,7 +2,7 @@
 
 ![SQL](https://img.shields.io/badge/SQL-MySQL%208.0%2B-4479A1?logo=mysql&logoColor=white) ![License](https://img.shields.io/badge/license-BlackCat%20Proprietary-red) ![Status](https://img.shields.io/badge/status-stable-informational) ![Generated](https://img.shields.io/badge/generated-from%20schema--map-blue)
 
-> Schema package for table **login_attempts** (repo: $slug).
+> Schema package for table **login_attempts** (repo: `login-attempts`).
 
 ## Files
 ```
@@ -52,13 +52,13 @@ mysql -h 127.0.0.1 -P 3307 -u root -proot app < schema/030_foreign_keys.sql
 ```mermaid
 erDiagram
   LOGIN_ATTEMPTS {
-    BIGINT id PK
-    BINARY(32) ip_hash
-    DATETIME(6) attempted_at
+    INT id PK
+    BLOB ip_hash
+    DATETIME attempted_at
     BOOLEAN success
-    BIGINT user_id
-    BINARY(32) username_hash
-    BIGINT auth_event_id
+    INT user_id
+    BLOB username_hash
+    INT auth_event_id
   }
   LOGIN_ATTEMPTS }o--|| AUTH_EVENTS : "auth_event_id"
   LOGIN_ATTEMPTS }o--|| USERS : "user_id"
