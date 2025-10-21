@@ -60,8 +60,8 @@ erDiagram
     BINARY(32) username_hash
     BIGINT auth_event_id
   }
-  LOGIN_ATTEMPTS }o--|| AUTH_EVENTS : (auth_event_id)
-  LOGIN_ATTEMPTS }o--|| USERS : (user_id)
+  LOGIN_ATTEMPTS }o--|| AUTH_EVENTS : "auth_event_id"
+  LOGIN_ATTEMPTS }o--|| USERS : "user_id"
 ```
 
 ## Indexes
