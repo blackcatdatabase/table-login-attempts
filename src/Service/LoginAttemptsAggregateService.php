@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace BlackCat\Database\Packages\LoginAttempts\Service;
 
-use BlackCat\Core\Database\Database;
+use BlackCat\Core\Database;
 use BlackCat\Database\Packages\LoginAttempts\Dto\LoginAttemptDto;
 use BlackCat\Database\Packages\LoginAttempts\Mapper\LoginAttemptDtoMapper;
 use BlackCat\Database\Packages\LoginAttempts\Repository\LoginAttemptRepository;
