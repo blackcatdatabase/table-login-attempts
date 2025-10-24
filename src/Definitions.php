@@ -6,7 +6,7 @@ namespace BlackCat\Database\Packages\LoginAttempts;
 final class Definitions {
     // --- základní metadata ---
     public static function table(): string { return 'login_attempts'; }
-    public static function contractView(): string { return 'v_login_attempts_contract'; }
+    public static function contractView(): string { return 'vw_login_attempts'; }
     /** @return string[] */
     public static function columns(): array { return [ 'id', 'ip_hash', 'attempted_at', 'success', 'user_id', 'username_hash', 'auth_event_id' ]; }
     public static function pk(): string { return 'id'; }

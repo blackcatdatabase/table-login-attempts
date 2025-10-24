@@ -10,7 +10,7 @@ namespace BlackCat\Database\Packages\LoginAttempts\Dto;
  */
 final class LoginAttemptDto {
     public function __construct(
-        public readonly int $id,
+        public readonly ?int $id,
         public readonly string $ipHash,
         public readonly \DateTimeImmutable $attemptedAt,
         public readonly bool $success,
