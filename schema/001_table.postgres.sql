@@ -1,4 +1,4 @@
--- Auto-generated from schema-map-postgres.psd1 (map@mtime:2025-10-24T09:46:38Z)
+-- Auto-generated from schema-map-postgres.psd1 (map@38d5403)
 -- engine: postgres
 -- table:  login_attempts
 CREATE TABLE IF NOT EXISTS login_attempts (
@@ -8,5 +8,6 @@ CREATE TABLE IF NOT EXISTS login_attempts (
   success BOOLEAN NOT NULL DEFAULT FALSE,
   user_id BIGINT NULL,
   username_hash BYTEA NULL,
-  auth_event_id BIGINT NULL
+  auth_event_id BIGINT NULL,
+  CONSTRAINT chk_login_success CHECK (success IN (FALSE, TRUE))
 );
