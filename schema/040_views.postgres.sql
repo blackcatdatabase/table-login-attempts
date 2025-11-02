@@ -1,4 +1,4 @@
--- Auto-generated from schema-views-postgres.psd1 (map@c5e4097)
+-- Auto-generated from schema-views-postgres.psd1 (map@db2f8b8)
 -- engine: postgres
 -- table:  login_attempts
 -- Contract view for [login_attempts]
@@ -7,11 +7,11 @@ CREATE OR REPLACE VIEW vw_login_attempts AS
 SELECT
   id,
   ip_hash,
-  encode(ip_hash, 'hex') AS ip_hash_hex,
+  UPPER(encode(ip_hash,'hex'))::char(32) AS ip_hash_hex,
   attempted_at,
   success,
   user_id,
   username_hash,
-  encode(username_hash, 'hex') AS username_hash_hex,
+  UPPER(encode(username_hash,'hex'))::char(64) AS username_hash_hex,
   auth_event_id
 FROM login_attempts;

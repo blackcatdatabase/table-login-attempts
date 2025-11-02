@@ -1,4 +1,4 @@
--- Auto-generated from schema-map-postgres.psd1 (map@c5e4097)
+-- Auto-generated from schema-map-postgres.psd1 (map@db2f8b8)
 -- engine: postgres
 -- table:  login_attempts
 ALTER TABLE login_attempts ADD CONSTRAINT fk_login_attempts_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL;
