@@ -1,4 +1,4 @@
--- Auto-generated from schema-map-postgres.psd1 (map@db2f8b8)
+-- Auto-generated from schema-map-postgres.psd1 (map@9d3471b)
 -- engine: postgres
 -- table:  login_attempts
 CREATE INDEX IF NOT EXISTS idx_login_ip_success_time ON login_attempts (ip_hash, success, attempted_at);
