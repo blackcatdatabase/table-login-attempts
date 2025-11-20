@@ -1,4 +1,4 @@
--- Auto-generated from schema-map-mysql.psd1 (map@db2f8b8)
+-- Auto-generated from schema-map-mysql.psd1 (map@62c9c93)
 -- engine: mysql
 -- table:  login_attempts
 CREATE TABLE IF NOT EXISTS login_attempts (
@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS login_attempts (
   INDEX idx_login_ip_success_time (ip_hash, success, attempted_at),
   INDEX idx_login_attempted_at (attempted_at),
   INDEX idx_login_username_hash (username_hash),
+  INDEX idx_login_auth_event (auth_event_id),
   INDEX idx_login_user_time (user_id, attempted_at),
   CONSTRAINT chk_login_success CHECK (success IN (0,1))
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;

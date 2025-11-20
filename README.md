@@ -2,7 +2,7 @@
 
 ![SQL](https://img.shields.io/badge/SQL-MySQL%208.0%2B-4479A1?logo=mysql&logoColor=white) ![License](https://img.shields.io/badge/license-BlackCat%20Proprietary-red) ![Status](https://img.shields.io/badge/status-stable-informational) ![Generated](https://img.shields.io/badge/generated-from%20schema--map-blue)
 
-<!-- Auto-generated from schema-map.psd1 @ 6cefe8e (2025-10-22T20:27:41+02:00) -->
+<!-- Auto-generated from schema-map-postgres.psd1 @ 62c9c93 (2025-11-20T21:38:11+01:00) -->
 
 > Schema package for table **login_attempts** (repo: `login-attempts`).
 
@@ -10,7 +10,7 @@
 ```
 schema/
   001_table.sql
-  # (no deferred indexes declared in map)
+  020_indexes.sql
   030_foreign_keys.sql
 ```
 
@@ -18,12 +18,14 @@ schema/
 ```bash
 # Apply schema (Linux/macOS):
 mysql -h "$DB_HOST" -u "$DB_USER" -p"$DB_PASS" "$DB_NAME" < schema/001_table.sql
+mysql -h "$DB_HOST" -u "$DB_USER" -p"$DB_PASS" "$DB_NAME" < schema/020_indexes.sql
 mysql -h "$DB_HOST" -u "$DB_USER" -p"$DB_PASS" "$DB_NAME" < schema/030_foreign_keys.sql
 ```
 
 ```powershell
 # Apply schema (Windows PowerShell):
 mysql -h $env:DB_HOST -u $env:DB_USER -p$env:DB_PASS $env:DB_NAME < schema/001_table.sql
+mysql -h $env:DB_HOST -u $env:DB_USER -p$env:DB_PASS $env:DB_NAME < schema/020_indexes.sql
 mysql -h $env:DB_HOST -u $env:DB_USER -p$env:DB_PASS $env:DB_NAME < schema/030_foreign_keys.sql
 ```
 
@@ -33,19 +35,20 @@ mysql -h $env:DB_HOST -u $env:DB_USER -p$env:DB_PASS $env:DB_NAME < schema/030_f
 docker run --rm -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=app -p 3307:3306 -d mysql:8
 sleep 15
 mysql -h 127.0.0.1 -P 3307 -u root -proot app < schema/001_table.sql
+mysql -h 127.0.0.1 -P 3307 -u root -proot app < schema/020_indexes.sql
 mysql -h 127.0.0.1 -P 3307 -u root -proot app < schema/030_foreign_keys.sql
 ```
 
 ## Columns
 | Column | Type | Null | Default | Extra |
 |-------:|:-----|:----:|:--------|:------|
-| id | BIGINT UNSIGNED | NO | — | AUTO_INCREMENT, PK |
-| ip_hash | BINARY(32) | NO | — |  |
-| attempted_at | DATETIME(6) | NO | CURRENT_TIMESTAMP(6) |  |
-| success | BOOLEAN | NO | 0 |  |
-| user_id | BIGINT UNSIGNED | YES | — |  |
-| username_hash | BINARY(32) | YES | — |  |
-| auth_event_id | BIGINT UNSIGNED | YES | — |  |
+| id | BIGINT | NO | AS | PK |
+| ip_hash | BYTEA | NO | — |  |
+| attempted_at | TIMESTAMPTZ(6) | NO | CURRENT_TIMESTAMP(6) |  |
+| success | BOOLEAN | NO | FALSE |  |
+| user_id | BIGINT | YES | — |  |
+| username_hash | BYTEA | YES | — |  |
+| auth_event_id | BIGINT | YES | — |  |
 
 ## Relationships
 - FK → **auth_events** via (auth_event_id) (ON DELETE SET NULL).
@@ -55,11 +58,11 @@ mysql -h 127.0.0.1 -P 3307 -u root -proot app < schema/030_foreign_keys.sql
 erDiagram
   LOGIN_ATTEMPTS {
     INT id PK
-    BLOB ip_hash
-    DATETIME attempted_at
+    BYTEA ip_hash
+    TIMESTAMPTZ attempted_at
     BOOLEAN success
     INT user_id
-    BLOB username_hash
+    BYTEA username_hash
     INT auth_event_id
   }
   LOGIN_ATTEMPTS }o--|| AUTH_EVENTS : "auth_event_id"
@@ -67,7 +70,7 @@ erDiagram
 ```
 
 ## Indexes
-- No deferred indexes declared for this table.
+- 4 deferred index statement(s) in schema/020_indexes.sql.
 
 ## Notes
 - Generated from the umbrella repository **blackcat-database** using `scripts/schema-map.psd1`.
