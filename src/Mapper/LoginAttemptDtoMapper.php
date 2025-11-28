@@ -17,7 +17,7 @@ use BlackCat\Database\Support\DtoHydrator;
 final class LoginAttemptDtoMapper
 {
     /** @var array<string,string> Column -> DTO property */
-    private const COL_TO_PROP = [ 'ip_hash' => 'ipHash', 'attempted_at' => 'attemptedAt', 'user_id' => 'userId', 'username_hash' => 'usernameHash', 'auth_event_id' => 'authEventId' ];
+    private const COL_TO_PROP = [ 'id' => 'id', 'ip_hash' => 'ipHash', 'attempted_at' => 'attemptedAt', 'success' => 'success', 'user_id' => 'userId', 'username_hash' => 'usernameHash', 'auth_event_id' => 'authEventId' ];
 
     /** @var string[] */
     private const BOOL_COLS   = [ 'success' ];
