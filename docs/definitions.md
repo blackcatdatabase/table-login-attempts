@@ -5,13 +5,13 @@ Login attempts per IP and (optional) user.
 ## Columns
 | Column | Type | Null | Default | Description |
 | --- | --- | --- | --- | --- |
-| attempted_at | TIMESTAMPTZ(6) | NO | CURRENT_TIMESTAMP(6) | Attempt time (UTC). |
+| attempted_at | DATETIME(6) | NO | CURRENT_TIMESTAMP(6) | Attempt time (UTC). |
 | auth_event_id | BIGINT | YES |  | Link to auth_events record, optional. |
 | id | BIGINT | NO |  | Surrogate primary key. |
-| ip_hash | BYTEA | NO |  | Hashed client IP. |
-| success | BOOLEAN | NO | FALSE | Whether authentication succeeded. |
+| ip_hash | BINARY(32) | NO |  | Hashed client IP. |
+| success | BOOLEAN | NO | 0 | Whether authentication succeeded. |
 | user_id | BIGINT | YES |  | User (FK users.id), optional. |
-| username_hash | BYTEA | YES |  | Hashed username/email provided. |
+| username_hash | BINARY(32) | YES |  | Hashed username/email provided. |
 
 ## Engine Details
 
@@ -54,11 +54,11 @@ Foreign keys:
 ## Views
 | View | Engine | Flags | File |
 | --- | --- | --- | --- |
-| vw_login_attempts | mysql | algorithm=MERGE, security=INVOKER | [packages\login-attempts\schema\040_views.mysql.sql](https://github.com/blackcatacademy/blackcat-database/packages/login-attempts/schema/040_views.mysql.sql) |
-| vw_login_attempts_activity | mysql | algorithm=TEMPTABLE, security=INVOKER | [packages\login-attempts\schema\040_views_joins.mysql.sql](https://github.com/blackcatacademy/blackcat-database/packages/login-attempts/schema/040_views_joins.mysql.sql) |
-| vw_login_hotspots_ip | mysql | algorithm=TEMPTABLE, security=INVOKER | [packages\login-attempts\schema\040_views_joins.mysql.sql](https://github.com/blackcatacademy/blackcat-database/packages/login-attempts/schema/040_views_joins.mysql.sql) |
-| vw_login_hotspots_user | mysql | algorithm=TEMPTABLE, security=INVOKER | [packages\login-attempts\schema\040_views_joins.mysql.sql](https://github.com/blackcatacademy/blackcat-database/packages/login-attempts/schema/040_views_joins.mysql.sql) |
-| vw_login_attempts | postgres |  | [packages\login-attempts\schema\040_views.postgres.sql](https://github.com/blackcatacademy/blackcat-database/packages/login-attempts/schema/040_views.postgres.sql) |
-| vw_login_attempts_activity | postgres |  | [packages\login-attempts\schema\040_views_joins.postgres.sql](https://github.com/blackcatacademy/blackcat-database/packages/login-attempts/schema/040_views_joins.postgres.sql) |
-| vw_login_hotspots_ip | postgres |  | [packages\login-attempts\schema\040_views_joins.postgres.sql](https://github.com/blackcatacademy/blackcat-database/packages/login-attempts/schema/040_views_joins.postgres.sql) |
-| vw_login_hotspots_user | postgres |  | [packages\login-attempts\schema\040_views_joins.postgres.sql](https://github.com/blackcatacademy/blackcat-database/packages/login-attempts/schema/040_views_joins.postgres.sql) |
+| vw_login_attempts | mysql | algorithm=MERGE, security=INVOKER | [schema\040_views.mysql.sql](schema\040_views.mysql.sql) |
+| vw_login_attempts_activity | mysql | algorithm=TEMPTABLE, security=INVOKER | [schema\040_views_joins.mysql.sql](schema\040_views_joins.mysql.sql) |
+| vw_login_hotspots_ip | mysql | algorithm=TEMPTABLE, security=INVOKER | [schema\040_views_joins.mysql.sql](schema\040_views_joins.mysql.sql) |
+| vw_login_hotspots_user | mysql | algorithm=TEMPTABLE, security=INVOKER | [schema\040_views_joins.mysql.sql](schema\040_views_joins.mysql.sql) |
+| vw_login_attempts | postgres |  | [schema\040_views.postgres.sql](schema\040_views.postgres.sql) |
+| vw_login_attempts_activity | postgres |  | [schema\040_views_joins.postgres.sql](schema\040_views_joins.postgres.sql) |
+| vw_login_hotspots_ip | postgres |  | [schema\040_views_joins.postgres.sql](schema\040_views_joins.postgres.sql) |
+| vw_login_hotspots_user | postgres |  | [schema\040_views_joins.postgres.sql](schema\040_views_joins.postgres.sql) |
