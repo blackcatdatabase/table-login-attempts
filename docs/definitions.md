@@ -9,7 +9,7 @@ Login attempts per IP and (optional) user.
 | auth_event_id | BIGINT | YES |  | Link to auth_events record, optional. |
 | id | BIGINT | NO |  | Surrogate primary key. |
 | ip_hash | mysql: BINARY(32) / postgres: BYTEA | NO |  | Hashed client IP. |
-| success | BOOLEAN | NO | FALSE | Whether authentication succeeded. |
+| success | BOOLEAN | NO | mysql: 0 / postgres: FALSE | Whether authentication succeeded. |
 | user_id | BIGINT | YES |  | User (FK users.id), optional. |
 | username_hash | mysql: BINARY(32) / postgres: BYTEA | YES |  | Hashed username/email provided. |
 
@@ -54,11 +54,11 @@ Foreign keys:
 ## Views
 | View | Engine | Flags | File |
 | --- | --- | --- | --- |
-| vw_login_attempts | mysql | algorithm=MERGE, security=INVOKER | [schema\040_views.mysql.sql](schema\040_views.mysql.sql) |
-| vw_login_attempts_activity | mysql | algorithm=TEMPTABLE, security=INVOKER | [schema\040_views_joins.mysql.sql](schema\040_views_joins.mysql.sql) |
-| vw_login_hotspots_ip | mysql | algorithm=TEMPTABLE, security=INVOKER | [schema\040_views_joins.mysql.sql](schema\040_views_joins.mysql.sql) |
-| vw_login_hotspots_user | mysql | algorithm=TEMPTABLE, security=INVOKER | [schema\040_views_joins.mysql.sql](schema\040_views_joins.mysql.sql) |
-| vw_login_attempts | postgres |  | [schema\040_views.postgres.sql](schema\040_views.postgres.sql) |
-| vw_login_attempts_activity | postgres |  | [schema\040_views_joins.postgres.sql](schema\040_views_joins.postgres.sql) |
-| vw_login_hotspots_ip | postgres |  | [schema\040_views_joins.postgres.sql](schema\040_views_joins.postgres.sql) |
-| vw_login_hotspots_user | postgres |  | [schema\040_views_joins.postgres.sql](schema\040_views_joins.postgres.sql) |
+| vw_login_attempts | mysql | algorithm=MERGE, security=INVOKER | [../schema/040_views.mysql.sql](../schema/040_views.mysql.sql) |
+| vw_login_attempts_activity | mysql | algorithm=TEMPTABLE, security=INVOKER | [../schema/040_views_joins.mysql.sql](../schema/040_views_joins.mysql.sql) |
+| vw_login_hotspots_ip | mysql | algorithm=TEMPTABLE, security=INVOKER | [../schema/040_views_joins.mysql.sql](../schema/040_views_joins.mysql.sql) |
+| vw_login_hotspots_user | mysql | algorithm=TEMPTABLE, security=INVOKER | [../schema/040_views_joins.mysql.sql](../schema/040_views_joins.mysql.sql) |
+| vw_login_attempts | postgres |  | [../schema/040_views.postgres.sql](../schema/040_views.postgres.sql) |
+| vw_login_attempts_activity | postgres |  | [../schema/040_views_joins.postgres.sql](../schema/040_views_joins.postgres.sql) |
+| vw_login_hotspots_ip | postgres |  | [../schema/040_views_joins.postgres.sql](../schema/040_views_joins.postgres.sql) |
+| vw_login_hotspots_user | postgres |  | [../schema/040_views_joins.postgres.sql](../schema/040_views_joins.postgres.sql) |
