@@ -10,8 +10,8 @@ Login attempts per IP and (optional) user.
 | id | BIGINT | NO |  | Surrogate primary key. |
 | ip_hash | mysql: BINARY(32) / postgres: BYTEA | NO |  | Hashed client IP. |
 | success | BOOLEAN | NO | mysql: 0 / postgres: FALSE | Whether authentication succeeded. |
-| user_id | BIGINT | YES |  | User (FK users.id), optional. |
 | username_hash | mysql: BINARY(32) / postgres: BYTEA | YES |  | Hashed username/email provided. |
+| user_id | BIGINT | YES |  | User (FK users.id), optional. |
 
 ## Engine Details
 
