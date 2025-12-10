@@ -99,7 +99,7 @@ _No engine differences detected._
 
 ## Constraints Snapshot
 - `attempted_at` – default=CURRENT_TIMESTAMP(6)
-- `success` – default=0
+- `success` – default=FALSE
 
 ## Schema Files
 | File | Engine |

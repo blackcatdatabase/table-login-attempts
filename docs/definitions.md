@@ -5,13 +5,13 @@ Login attempts per IP and (optional) user.
 ## Columns
 | Column | Type | Null | Default | Description |
 | --- | --- | --- | --- | --- |
-| attempted_at | DATETIME(6) | NO | CURRENT_TIMESTAMP(6) | Attempt time (UTC). |
+| attempted_at | mysql: DATETIME(6) / postgres: TIMESTAMPTZ(6) | NO | CURRENT_TIMESTAMP(6) | Attempt time (UTC). |
 | auth_event_id | BIGINT | YES |  | Link to auth_events record, optional. |
 | id | BIGINT | NO |  | Surrogate primary key. |
-| ip_hash | BINARY(32) | NO |  | Hashed client IP. |
-| success | BOOLEAN | NO | 0 | Whether authentication succeeded. |
+| ip_hash | mysql: BINARY(32) / postgres: BYTEA | NO |  | Hashed client IP. |
+| success | BOOLEAN | NO | FALSE | Whether authentication succeeded. |
 | user_id | BIGINT | YES |  | User (FK users.id), optional. |
-| username_hash | BINARY(32) | YES |  | Hashed username/email provided. |
+| username_hash | mysql: BINARY(32) / postgres: BYTEA | YES |  | Hashed username/email provided. |
 
 ## Engine Details
 
