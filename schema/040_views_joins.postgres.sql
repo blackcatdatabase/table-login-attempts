@@ -1,4 +1,4 @@
--- Auto-generated from joins-postgres.yaml (map@sha1:29CF395A3A4C8964482083733F8E613ABFBEF5CC)
+-- Auto-generated from core\joins-postgres.yaml (map@sha1:29CF395A3A4C8964482083733F8E613ABFBEF5CC)
 -- engine: postgres
 -- view:   login_attempts_activity
 
@@ -13,7 +13,7 @@ FROM users u
 LEFT JOIN login_attempts l ON l.user_id = u.id
 GROUP BY u.id;
 
--- Auto-generated from joins-postgres.yaml (map@sha1:29CF395A3A4C8964482083733F8E613ABFBEF5CC)
+-- Auto-generated from core\joins-postgres.yaml (map@sha1:29CF395A3A4C8964482083733F8E613ABFBEF5CC)
 -- engine: postgres
 -- view:   login_hotspots_ip
 
@@ -31,7 +31,7 @@ HAVING COUNT(*) FILTER (WHERE success = false AND attempted_at > now() - interva
 ORDER BY failed_24h DESC, last_attempt_at DESC;
 
 
--- Auto-generated from joins-postgres.yaml (map@sha1:29CF395A3A4C8964482083733F8E613ABFBEF5CC)
+-- Auto-generated from core\joins-postgres.yaml (map@sha1:29CF395A3A4C8964482083733F8E613ABFBEF5CC)
 -- engine: postgres
 -- view:   login_hotspots_user
 

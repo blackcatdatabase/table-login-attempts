@@ -97,8 +97,8 @@ SQL;
         $hasTable = SchemaIntrospector::hasTable($db, $d, $table);
         $hasView  = SchemaIntrospector::hasView($db, $d, $view);
 
-        // Quick index/FK check â€“ generator injects names (case-sensitive per DB)
-        $expectedIdx = [];
+        // Quick index/FK check - generator injects names (case-sensitive per DB)
+        $expectedIdx = [ 'idx_login_attempted_at', 'idx_login_auth_event', 'idx_login_ip_success_time', 'idx_login_user_time', 'idx_login_username_hash' ];
         if ($d->isMysql()) {
             // Drop PG-only index naming patterns (e.g., GIN/GiST)
             $expectedIdx = array_values(array_filter(
@@ -131,7 +131,7 @@ SQL;
             'columns'     => Definitions::columns(),
             'version'     => $this->version(),
             'dialects'    => [ 'mysql', 'postgres' ],
-            'indexes'     => [],
+            'indexes'     => [ 'idx_login_attempted_at', 'idx_login_auth_event', 'idx_login_ip_success_time', 'idx_login_user_time', 'idx_login_username_hash' ],
             'foreignKeys' => [ 'fk_login_attempts_auth_event', 'fk_login_attempts_user' ],
         ];
     }
