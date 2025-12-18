@@ -1,4 +1,4 @@
--- Auto-generated from core\joins-mysql.yaml (map@sha1:DA70105A5B799F72A56FEAB71A5171F946A770D2)
+-- Auto-generated from core/joins-mysql.yaml (map@sha1:DA70105A5B799F72A56FEAB71A5171F946A770D2)
 -- engine: mysql
 -- view:   login_attempts_activity
 
@@ -12,7 +12,7 @@ FROM users u
 LEFT JOIN login_attempts l ON l.user_id = u.id
 GROUP BY u.id;
 
--- Auto-generated from core\joins-mysql.yaml (map@sha1:DA70105A5B799F72A56FEAB71A5171F946A770D2)
+-- Auto-generated from core/joins-mysql.yaml (map@sha1:DA70105A5B799F72A56FEAB71A5171F946A770D2)
 -- engine: mysql
 -- view:   login_hotspots_ip
 
@@ -29,7 +29,7 @@ HAVING SUM(CASE WHEN success = 0 AND attempted_at > NOW() - INTERVAL 24 HOUR THE
 ORDER BY failed_24h DESC, last_attempt_at DESC;
 
 
--- Auto-generated from core\joins-mysql.yaml (map@sha1:DA70105A5B799F72A56FEAB71A5171F946A770D2)
+-- Auto-generated from core/joins-mysql.yaml (map@sha1:DA70105A5B799F72A56FEAB71A5171F946A770D2)
 -- engine: mysql
 -- view:   login_hotspots_user
 
