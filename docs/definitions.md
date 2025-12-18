@@ -3,15 +3,17 @@
 Login attempts per IP and (optional) user.
 
 ## Columns
-| Column | Type | Null | Default | Description |
-| --- | --- | --- | --- | --- |
-| id | BIGINT | NO |  | Surrogate primary key. |
-| ip_hash | mysql: BINARY(32) / postgres: BYTEA | NO |  | Hashed client IP. |
-| attempted_at | mysql: DATETIME(6) / postgres: TIMESTAMPTZ(6) | NO | CURRENT_TIMESTAMP(6) | Attempt time (UTC). |
-| success | BOOLEAN | NO | mysql: 0 / postgres: FALSE | Whether authentication succeeded. |
-| user_id | BIGINT | YES |  | User (FK users.id), optional. |
-| username_hash | mysql: BINARY(32) / postgres: BYTEA | YES |  | Hashed username/email provided. |
-| auth_event_id | BIGINT | YES |  | Link to auth_events record, optional. |
+| Column | Type | Null | Default | Description | Crypto |
+| --- | --- | --- | --- | --- | --- |
+| id | BIGINT | NO |  | Surrogate primary key. |  |
+| ip_hash | mysql: BINARY(32) / postgres: BYTEA | NO |  | Hashed client IP. | `hmac`<br/>ctx: `db.hmac.login_attempts.ip_hash`<br/>kv: `ip_hash_key_version` |
+| ip_hash_key_version | VARCHAR(64) | YES |  | Key version for ip_hash. | key version for: `ip_hash` |
+| attempted_at | mysql: DATETIME(6) / postgres: TIMESTAMPTZ(6) | NO | CURRENT_TIMESTAMP(6) | Attempt time (UTC). |  |
+| success | BOOLEAN | NO | mysql: 0 / postgres: FALSE | Whether authentication succeeded. |  |
+| user_id | BIGINT | YES |  | User (FK users.id), optional. |  |
+| username_hash | mysql: BINARY(32) / postgres: BYTEA | YES |  | Hashed username/email provided. | `hmac`<br/>ctx: `db.hmac.login_attempts.username_hash`<br/>kv: `username_hash_key_version` |
+| username_hash_key_version | VARCHAR(64) | YES |  | Key version for username_hash. | key version for: `username_hash` |
+| auth_event_id | BIGINT | YES |  | Link to auth_events record, optional. |  |
 
 ## Engine Details
 

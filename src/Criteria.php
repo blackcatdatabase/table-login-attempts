@@ -32,19 +32,19 @@ final class Criteria extends BaseCriteria
     /** Columns that are safe to use inside WHERE filters. */
     protected function filterable(): array
     {
-        return [ 'id', 'ip_hash', 'attempted_at', 'success', 'user_id', 'username_hash', 'auth_event_id' ];
+        return [ 'id', 'ip_hash', 'ip_hash_key_version', 'attempted_at', 'success', 'user_id', 'username_hash', 'username_hash_key_version', 'auth_event_id' ];
     }
 
     /** Columns used for full-text LIKE/ILIKE searches. */
     protected function searchable(): array
     {
-        return [];
+        return [ 'ip_hash_key_version', 'username_hash_key_version' ];
     }
 
     /** Columns allowed in ORDER BY (falls back to filterable() when empty). */
     protected function sortable(): array
     {
-        return [ 'id', 'attempted_at', 'success', 'user_id', 'auth_event_id' ];
+        return [ 'id', 'ip_hash_key_version', 'attempted_at', 'success', 'user_id', 'username_hash_key_version', 'auth_event_id' ];
     }
 
     /**
