@@ -12,10 +12,12 @@ final class LoginAttemptDto implements \JsonSerializable {
     public function __construct(
         public readonly int $id,
         #[\SensitiveParameter] public readonly string $ipHash,
+        public readonly ?string $ipHashKeyVersion,
         public readonly \DateTimeImmutable $attemptedAt,
         public readonly bool $success,
         public readonly ?int $userId,
         public readonly ?string $usernameHash,
+        public readonly ?string $usernameHashKeyVersion,
         public readonly ?int $authEventId
     ) {}
 

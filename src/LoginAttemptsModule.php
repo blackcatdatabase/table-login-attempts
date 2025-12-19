@@ -38,11 +38,13 @@ CREATE OR REPLACE ALGORITHM=MERGE SQL SECURITY INVOKER VIEW vw_login_attempts AS
 SELECT
   id,
   ip_hash,
+  ip_hash_key_version,
   CAST(LPAD(HEX(ip_hash), 64, '0')  AS CHAR(64)) AS ip_hash_hex,
   attempted_at,
   success,
   user_id,
   username_hash,
+  username_hash_key_version,
   CAST(LPAD(HEX(username_hash), 64, '0') AS CHAR(64)) AS username_hash_hex,
   auth_event_id
 FROM login_attempts;
@@ -53,11 +55,13 @@ CREATE OR REPLACE VIEW vw_login_attempts AS
 SELECT
   id,
   ip_hash,
+  ip_hash_key_version,
   UPPER(encode(ip_hash,'hex')) AS ip_hash_hex,
   attempted_at,
   success,
   user_id,
   username_hash,
+  username_hash_key_version,
   UPPER(encode(username_hash,'hex')) AS username_hash_hex,
   auth_event_id
 FROM login_attempts;
@@ -97,8 +101,8 @@ SQL;
         $hasTable = SchemaIntrospector::hasTable($db, $d, $table);
         $hasView  = SchemaIntrospector::hasView($db, $d, $view);
 
-        // Quick index/FK check â€“ generator injects names (case-sensitive per DB)
-        $expectedIdx = [];
+        // Quick index/FK check - generator injects names (case-sensitive per DB)
+        $expectedIdx = [ 'idx_login_attempted_at', 'idx_login_auth_event', 'idx_login_ip_success_time', 'idx_login_user_time', 'idx_login_username_hash' ];
         if ($d->isMysql()) {
             // Drop PG-only index naming patterns (e.g., GIN/GiST)
             $expectedIdx = array_values(array_filter(
@@ -131,7 +135,7 @@ SQL;
             'columns'     => Definitions::columns(),
             'version'     => $this->version(),
             'dialects'    => [ 'mysql', 'postgres' ],
-            'indexes'     => [],
+            'indexes'     => [ 'idx_login_attempted_at', 'idx_login_auth_event', 'idx_login_ip_success_time', 'idx_login_user_time', 'idx_login_username_hash' ],
             'foreignKeys' => [ 'fk_login_attempts_auth_event', 'fk_login_attempts_user' ],
         ];
     }
